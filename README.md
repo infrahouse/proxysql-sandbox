@@ -3,6 +3,8 @@
 proxysql-sandbox is a terraform live module that allows quickly deploy a
 sandbox ProxySQL setup.
 
+![Untitled drawing](https://github.com/infrahouse/proxysql-sandbox/assets/1763754/95fa1ce2-3a18-42f4-8020-e541c8dff61c)
+
 The setup includes:
 
 * MySQL replica set: a master and one replica
