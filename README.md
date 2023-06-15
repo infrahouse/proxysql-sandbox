@@ -40,7 +40,7 @@ See other examples on the [AWS docs website](https://docs.aws.amazon.com/cli/lat
 ## Running Terraform plan
 
 ```
-$ make plan
+# make plan
 ```
 
 <details>
@@ -518,22 +518,22 @@ $ make plan
   
 ## Running Terraform apply
  
-  ```
-  $ make apply
-  ```
+```
+# make apply
+```
   
-  The terraform output variables give IP addresses of the launched instances:
-  ```
-  Outputs:
+The terraform output variables give IP addresses of the launched instances:
+```
+Outputs:
 
-  client = "3.101.62.71"
-  mysql = "54.177.26.133"
-  proxysql = "54.177.24.141"
-  replica = "52.53.183.3"
-  ```
+client = "3.101.62.71"
+mysql = "54.177.26.133"
+proxysql = "54.177.24.141"
+replica = "52.53.183.3"
+```
   
   
-  <details>
+<details>
     <summary>Sample output</summary>
     <pre>
     terraform apply -auto-approve -input=false tf.plan
@@ -577,35 +577,32 @@ $ make plan
     aws_instance.client: Creating...
     aws_instance.client: Still creating... [10s elapsed]
     aws_instance.client: Creation complete after 12s [id=i-0112d94b26260ef30]
-
     Apply complete! Resources: 14 added, 0 changed, 0 destroyed.
-
     Outputs:
-
     client = "3.101.62.71"
     mysql = "54.177.26.133"
     proxysql = "54.177.24.141"
     replica = "52.53.183.3"
     </pre>
-</detals>
+</details>
 
 ## Accessing Instances
  
 Terraform installs your key from `~/.ssh/id_rsa.pub` in the instances' `/home/ubuntu/.ssh/authorized_keys`.
   
-So if you have the respective private SSH key and there were not errors up until now this should work:
+So if you have the respective private SSH key and there were no errors up until now this should work:
 
 ```
-$ ssh -l ubuntu 3.101.62.71
+# ssh -l ubuntu 3.101.62.71
 Welcome to Ubuntu 20.04.6 LTS (GNU/Linux 5.15.0-1037-aws x86_64)
 
 ...
 ubuntu@ip-172-31-22-208:~$
 ```
 
-  ## After you done
+## After you done
   
-  When you don't need the sandbox anymore run `make destroy` to remove created resources.
-  ```
-  
-  ```
+When you don't need the sandbox anymore run `make destroy` to remove created resources.
+```
+# make destroy
+```
