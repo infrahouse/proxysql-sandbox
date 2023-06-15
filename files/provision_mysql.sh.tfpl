@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+while true
+do
+  mysql -u root --skip-password -e 'select @@hostname' && break
+  sleep 1
+done
+
+
+# ProxySQL monitor
+mysql -u root --skip-password -e "CREATE USER 'monitor'@'%' IDENTIFIED BY 'monitor'; GRANT REPLICATION CLIENT ON *.* TO 'monitor'@'%'"
+
+# Client
+# shellcheck disable=SC2016
+mysql -u root --skip-password -e 'CREATE DATABASE `${client_mysql_db}`'
+# shellcheck disable=SC2154
+mysql -u root --skip-password -e "CREATE USER '${client_mysql_user}'@'%' IDENTIFIED WITH mysql_native_password BY '${client_mysql_password}'; GRANT ALL ON \`${client_mysql_db}\`.* TO '${client_mysql_user}'@'%'"
+
+# Replication
+# shellcheck disable=SC2154
+mysql -u root --skip-password -e "CREATE USER '${repl_user}'@'%' IDENTIFIED WITH mysql_native_password BY '${repl_password}'"
+mysql -u root --skip-password -e "GRANT REPLICATION SLAVE ON *.* TO '${repl_user}'@'%'"
+
+# Root
+# shellcheck disable=SC2154
+mysql -u root --skip-password -e "CREATE USER 'root'@'%' IDENTIFIED BY '${mysql_password}'; GRANT ALL ON *.* TO 'root'@'%'; DROP USER 'root'@'localhost'"

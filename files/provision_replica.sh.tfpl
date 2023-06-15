@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+while true
+do
+  mysql -u root --skip-password -e 'select @@hostname' && break
+  sleep 1
+done
+
+mysql -u root --skip-password -e "CHANGE MASTER TO MASTER_HOST = '${mysql_server}', MASTER_PORT = 3306, MASTER_USER = '${repl_user}', MASTER_PASSWORD = '${repl_password}', MASTER_AUTO_POSITION = 1, MASTER_CONNECT_RETRY = 10;"
+mysql -u root --skip-password -e "START SLAVE"
+

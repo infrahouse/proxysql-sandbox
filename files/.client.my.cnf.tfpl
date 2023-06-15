@@ -1,0 +1,5 @@
+[client]
+user = ${client_mysql_user}
+password = ${client_mysql_password}
+port = 6033
+host = ${proxysql_ip}

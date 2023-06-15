@@ -1,0 +1,12 @@
+[mysqld]
+user         = mysql
+bind-address = 0.0.0.0
+log_error    = /var/log/mysql/error.log
+
+server-id                = ${server_id}
+read_only                = ${read_only}
+log-bin                  = mysql-bin
+binlog_format            = ROW
+gtid-mode                = ON
+enforce-gtid-consistency = ON
+log-slave-updates        = ON
